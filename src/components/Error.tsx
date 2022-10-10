@@ -22,7 +22,7 @@ const Error: React.FC<any> = ({ errors }: { errors?: any[] | undefined }) => {
 					type="primary"
 					key="console"
 					size="large"
-					onClick={() => [setErrors([]), navigate("/")]}
+					onClick={() => [setErrors(""), navigate("/")]}
 					style={{
 						background: "#cb2121",
 						border: "none",

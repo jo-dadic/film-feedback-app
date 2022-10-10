@@ -5,11 +5,11 @@ export interface ContextModel {
 	data: ResponseData | undefined;
 	submittedAnswer: SubmittedAnswer[] | undefined;
 	loading: boolean;
-	errors: any[];
+	errors: string;
 	setData?: Dispatch<SetStateAction<ResponseData | undefined>>;
 	setSubmittedAnswer?: Dispatch<SetStateAction<SubmittedAnswer[] | undefined>>;
 	setLoading?: Dispatch<SetStateAction<boolean>>;
-	setErrors: Dispatch<SetStateAction<[]>>;
+	setErrors: Dispatch<SetStateAction<string>>;
 	getFormDataHandler: () => void;
 	submitForm: (values: any) => void;
 }

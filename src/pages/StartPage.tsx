@@ -19,11 +19,7 @@ const StartPage: React.FC = () => {
 		getFormDataHandler();
 	}, [getFormDataHandler]);
 
-	if (loading) {
-		return <Loading />;
-	}
-
-	if (errors?.length > 0) {
+	if (errors !== "") {
 		return <Error errors={errors} />;
 	}
 
@@ -34,19 +30,26 @@ const StartPage: React.FC = () => {
 			align="center"
 			style={{ width: "100%" }}
 		>
-			<Header title={data?.attributes.title} />
+			{loading ? (
+				<Loading />
+			) : (
+				<>
+					<Header title={data?.attributes.title} />
+					<h3
+						className="text-white text-center"
+						dangerouslySetInnerHTML={{
+							__html: data?.attributes.description || "",
+						}}
+					></h3>
 
-			<h3
-				className="text-white text-center"
-				dangerouslySetInnerHTML={{ __html: data?.attributes.description || "" }}
-			></h3>
-
-			<Card style={{ borderRadius: "8px" }}>
-				<FeedbackForm
-					formQuestions={formQuestions}
-					formSubmitHandler={submitForm}
-				/>
-			</Card>
+					<Card style={{ borderRadius: "8px" }}>
+						<FeedbackForm
+							formQuestions={formQuestions}
+							formSubmitHandler={submitForm}
+						/>
+					</Card>
+				</>
+			)}
 		</Space>
 	);
 };

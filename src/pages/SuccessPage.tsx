@@ -19,11 +19,7 @@ const SuccessPage: React.FC = () => {
 		}
 	}, [navigate, submittedAnswer]);
 
-	if (loading || !submittedAnswer) {
-		return <Loading />;
-	}
-
-	if (errors?.length > 0) {
+	if (errors !== "") {
 		return <Error errors={errors} />;
 	}
 
@@ -34,11 +30,17 @@ const SuccessPage: React.FC = () => {
 			align="center"
 			style={{ width: "100%" }}
 		>
-			<Header title="Thank you for the review!" />
-			<h2 className="text-white text-center">
-				You watched {submittedAnswer![0].answer} and you gave it{" "}
-				{submittedAnswer![1].answer} stars!
-			</h2>
+			{loading || !submittedAnswer ? (
+				<Loading />
+			) : (
+				<>
+					<Header title="Thank you for the review!" />
+					<h2 className="text-white text-center">
+						You watched {submittedAnswer![0].answer} and you gave it{" "}
+						{submittedAnswer![1].answer} stars!
+					</h2>
+				</>
+			)}
 		</Space>
 	);
 };

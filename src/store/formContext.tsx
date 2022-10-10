@@ -9,11 +9,11 @@ const defaultValue: ContextModel = {
 	data: undefined,
 	submittedAnswer: undefined,
 	loading: false,
-	errors: [],
+	errors: "",
 	setData: undefined,
 	setSubmittedAnswer: undefined,
 	setLoading: () => false,
-	setErrors: () => false,
+	setErrors: () => "",
 	getFormDataHandler: () => {},
 	submitForm: () => {},
 };
@@ -28,7 +28,7 @@ const FormContextProvider = ({ children }: any) => {
 		SubmittedAnswer[] | undefined
 	>();
 	const [loading, setLoading] = useState<boolean>(false);
-	const [errors, setErrors] = useState<[]>([]);
+	const [errors, setErrors] = useState<string>("");
 
 	const getFormDataHandler = useCallback(() => {
 		setLoading(true);
