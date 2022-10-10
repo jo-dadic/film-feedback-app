@@ -1,9 +1,12 @@
 import { Button, Form, Input, InputNumber } from "antd";
 import { FormProps, Question } from "../models/formDataModels";
 
-const FeedbackForm: React.FC<FormProps> = ({ formQuestions }: FormProps) => {
+const FeedbackForm: React.FC<FormProps> = ({
+	formQuestions,
+	formSubmitHandler,
+}: FormProps) => {
 	return (
-		<Form layout="vertical" labelAlign="left">
+		<Form onFinish={formSubmitHandler} layout="vertical" labelAlign="left">
 			{formQuestions?.map((q: Question, ind: number) => {
 				return (
 					<div key={q.questionId}>

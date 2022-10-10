@@ -3,6 +3,13 @@ const jsonServer = require("json-server");
 const server = jsonServer.create();
 const data = require(path.join(__dirname, "data.json"));
 
+// CORS fix
+server.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "*");
+	next();
+});
+
 server.use(jsonServer.bodyParser);
 
 // Survey handlers - HTTP GET returns data, anything else should return 500

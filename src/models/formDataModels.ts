@@ -20,6 +20,7 @@ export interface Question {
 
 export interface FormProps {
 	formQuestions?: Question[];
+	formSubmitHandler: any;
 }
 
 export interface SubmittedAnswer {

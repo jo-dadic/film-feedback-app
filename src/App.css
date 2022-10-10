@@ -1,3 +1,14 @@
 .App {
-	text-align: center;
+	z-index: 10;
+	position: relative;
+	padding: 16px;
+}
+
+.header h1 {
+	font-size: 50px;
+	letter-spacing: 0.1em;
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke-width: 3px;
+	-webkit-text-stroke-color: white;
+	text-shadow: 8px 8px #cb2121, 15px 15px #c2bebe;
 }
