@@ -1,4 +1,4 @@
-import { Button, Form, Input, InputNumber } from "antd";
+import { Button, Form, Input, Rate } from "antd";
 import { FormProps, Question } from "../models/formDataModels";
 
 const FeedbackForm: React.FC<FormProps> = ({
@@ -26,11 +26,9 @@ const FeedbackForm: React.FC<FormProps> = ({
 							]}
 						>
 							{q.questionType === "rating" ? (
-								<InputNumber
-									style={{ width: "100%", borderRadius: "8px" }}
-									min={q?.attributes?.min}
-									max={q?.attributes?.max}
-									size={"large"}
+								<Rate
+									allowClear={false}
+									style={{ width: "100%", textAlign: "center", fontSize: 30 }}
 								/>
 							) : (
 								<Input style={{ borderRadius: "8px" }} size={"large"} />

@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import StartPage from "./pages/StartPage";
 import SuccessPage from "./pages/SuccessPage";
+import ErrorPage from "./pages/ErrorPage";
 
 import "./App.css";
-import ErrorPage from "./pages/ErrorPage";
 
 const App: React.FC = () => {
 	return (

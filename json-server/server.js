@@ -75,7 +75,7 @@ server.post("/api/v1/survey/:id/answers", (req, res) => {
 				errors.push(
 					buildError(
 						`data/attributes/answers/${question.questionId}`,
-						"The value is invalid."
+						`The value for ${question.questionId} is invalid.`
 					)
 				);
 			}
@@ -83,7 +83,7 @@ server.post("/api/v1/survey/:id/answers", (req, res) => {
 	});
 
 	if (errors.length > 0) {
-		res.status(500).json({ errors });
+		res.status(422).json({ errors });
 	} else {
 		const id = Math.random().toString();
 		res.status(201).json({

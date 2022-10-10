@@ -3,11 +3,13 @@ import { ResponseData, SubmittedAnswer } from "./formDataModels";
 
 export interface ContextModel {
 	data: ResponseData | undefined;
-	setData?: Dispatch<SetStateAction<ResponseData | undefined>>;
-	loading: boolean;
-	setLoading?: Dispatch<SetStateAction<boolean>>;
 	submittedAnswer: SubmittedAnswer[] | undefined;
+	loading: boolean;
+	errors: any[];
+	setData?: Dispatch<SetStateAction<ResponseData | undefined>>;
 	setSubmittedAnswer?: Dispatch<SetStateAction<SubmittedAnswer[] | undefined>>;
+	setLoading?: Dispatch<SetStateAction<boolean>>;
+	setErrors: Dispatch<SetStateAction<[]>>;
 	getFormDataHandler: () => void;
 	submitForm: (values: any) => void;
 }

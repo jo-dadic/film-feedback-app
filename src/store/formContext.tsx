@@ -7,11 +7,13 @@ const url = "http://localhost:3020/api/v1/survey";
 
 const defaultValue: ContextModel = {
 	data: undefined,
-	setData: undefined,
-	loading: false,
 	submittedAnswer: undefined,
-	setLoading: () => false,
+	loading: false,
+	errors: [],
+	setData: undefined,
 	setSubmittedAnswer: undefined,
+	setLoading: () => false,
+	setErrors: () => false,
 	getFormDataHandler: () => {},
 	submitForm: () => {},
 };
@@ -26,13 +28,15 @@ const FormContextProvider = ({ children }: any) => {
 		SubmittedAnswer[] | undefined
 	>();
 	const [loading, setLoading] = useState<boolean>(false);
+	const [errors, setErrors] = useState<[]>([]);
 
 	const getFormDataHandler = useCallback(() => {
 		setLoading(true);
 		fetch(url)
 			.then((response) => response.json())
 			.then((data) => setData(data.data))
-			.finally(() => setLoading(false));
+			.then(() => setLoading(false))
+			.catch((error) => [setErrors(error), setLoading(false)]);
 	}, []);
 
 	const submitForm = (values: any) => {
@@ -49,7 +53,7 @@ const FormContextProvider = ({ children }: any) => {
 						answers: [
 							{
 								questionId: "film",
-								answer: values.film,
+								answer: values.film?.trim(),
 							},
 							{
 								questionId: "review",
@@ -61,19 +65,29 @@ const FormContextProvider = ({ children }: any) => {
 			}),
 		})
 			.then((response) => response.json())
+			.then((response) => {
+				if (response.errors) {
+					throw new Error("Something went wrong", { cause: response });
+				}
+				return response;
+			})
 			.then((response) => setSubmittedAnswer(response.data.attributes.answers))
-			.finally(() => [navigate("/success"), setLoading(false)])
-			.catch(() => navigate("/"));
-		// add errors
+			.then(() => navigate("/success"))
+			.catch((error) => {
+				setErrors(error.cause.errors[0].detail);
+			})
+			.finally(() => setLoading(false));
 	};
 
 	const values: ContextModel = {
 		data,
 		loading,
 		submittedAnswer,
+		errors,
 		getFormDataHandler,
-		setSubmittedAnswer,
 		submitForm,
+		setSubmittedAnswer,
+		setErrors,
 	};
 
 	return <FormContext.Provider value={values}>{children}</FormContext.Provider>;

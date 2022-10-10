@@ -2,13 +2,15 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Loading from "../components/Loading";
+import Error from "../components/Error";
 import { ContextModel } from "../models/contextModel";
 import { FormContext } from "../store/formContext";
 
 import { Space } from "antd";
 
 const SuccessPage: React.FC = () => {
-	const { submittedAnswer, loading } = useContext<ContextModel>(FormContext);
+	const { submittedAnswer, loading, errors } =
+		useContext<ContextModel>(FormContext);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -21,7 +23,9 @@ const SuccessPage: React.FC = () => {
 		return <Loading />;
 	}
 
-	console.log(submittedAnswer);
+	if (errors?.length > 0) {
+		return <Error errors={errors} />;
+	}
 
 	return (
 		<Space

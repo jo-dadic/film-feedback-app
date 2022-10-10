@@ -1,15 +1,16 @@
 import { useEffect, useContext } from "react";
 import Loading from "../components/Loading";
+import Error from "../components/Error";
+import Header from "../components/Header";
+import FeedbackForm from "../components/FeedbackForm";
 import { FormContext } from "../store/formContext";
+import { ContextModel } from "../models/contextModel";
+import { Question } from "../models/formDataModels";
 
 import { Space, Card } from "antd";
-import Header from "../components/Header";
-import { Question } from "../models/formDataModels";
-import FeedbackForm from "../components/FeedbackForm";
-import { ContextModel } from "../models/contextModel";
 
 const StartPage: React.FC = () => {
-	const { data, loading, getFormDataHandler, submitForm } =
+	const { data, loading, errors, getFormDataHandler, submitForm } =
 		useContext<ContextModel>(FormContext);
 
 	const formQuestions: Question[] | undefined = data?.attributes.questions;
@@ -20,6 +21,10 @@ const StartPage: React.FC = () => {
 
 	if (loading) {
 		return <Loading />;
+	}
+
+	if (errors?.length > 0) {
+		return <Error errors={errors} />;
 	}
 
 	return (
