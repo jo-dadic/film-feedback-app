@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ContextModel } from "../models/contextModel";
 import { ResponseData, SubmittedAnswer } from "../models/formDataModels";
 
-const url = "http://localhost:4000/api/v1/survey";
+const url = "https://film-feedback-server.herokuapp.com/api/v1/survey";
 
 const defaultValue: ContextModel = {
 	data: undefined,
