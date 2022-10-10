@@ -27,10 +27,3 @@ body::after {
 	top: 0;
 	left: 0;
 }
-
-.text-white {
-	color: #fff;
-}
-.text-center {
-	text-align: center;
-}

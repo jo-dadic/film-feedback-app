@@ -12,3 +12,11 @@
 	-webkit-text-stroke-color: white;
 	text-shadow: 8px 8px #cb2121, 15px 15px #c2bebe;
 }
+
+.text-white {
+	color: #fff;
+}
+
+.text-center {
+	text-align: center;
+}
