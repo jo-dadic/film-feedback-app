@@ -64,6 +64,7 @@ const FormContextProvider = ({ children }: any) => {
 			.then((response) => setSubmittedAnswer(response.data.attributes.answers))
 			.finally(() => [navigate("/success"), setLoading(false)])
 			.catch(() => navigate("/"));
+		// add errors
 	};
 
 	const values: ContextModel = {
